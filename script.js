@@ -1,45 +1,47 @@
 //pull from html using variables
-let todoEl = $("#data-input");
+let userInput = $("#data-input");
+let displayEl = $("<div>");
 
+let itemsArray = [];
+let items
+
+if (localStorage.getItem('items')) {
+  items = JSON.parse(localStorage.getItem('items'))
+} else {
+  items = []
+}
+
+localStorage.setItem("data-input", JSON.stringify(itemsArray));
+const data = JSON.parse(localStorage.getItem('data-input'))
 
 //use local storage to save information
 
-// localstorage.setitem("save as an object", variable set for the appointments)
-// get item to pull from and place on screem
-    // make an object that stores 9-5 variables
+    const liMaker = (text) => {
+        let todoList = document.createElement("li");
+        todoList.text = text;
+        displayEl.append(todoList);
+    }
+
+
+
 
     $(".saveBtn").on("click", function(event){
         event.preventDefault();
-        function store() {
-            window.localStorage.setItem("data-input", JSON.stringify(todoEl));
-        }
      
-    store();
-    
+        liMaker(userInput.value);
+        userInput.value = "";
+
+        itemsArray.push(userInput.value);
+        localStorage.setItem('items', JSON.stringify(itemsArray));
+        liMaker(userInput.value);
+        userInput.value = '';
+
+  console.log(itemsArray, items)
+        
     });
-
-    function getFromStorage() {
-        window.localStorage.getItem("data-input");
-        let stringified = JSON.parse(todoEl);
-        return stringified;
-    }
-    getFromStorage();
-
-    // set colors with changing times
-        //set conditionals if/else
-        //set times
-        //moment.hours set to variable
-            //evaluate that value to the time block between "#time-id"
-            //assign past/present/furture colors
-
-
-//dot siblings or parent
-
-    // let userInput = key.value;
-
-    // localStorage.setItem("data-input", userInput);
-    // todoEl.text = userInput;
-    //    todoEl.text = localStorage.getItem("userInput");
+    data.forEach((item) => {
+        liMaker(item);
+      });
 
     //set date and time using moment
 
@@ -48,13 +50,13 @@ let todoEl = $("#data-input");
     console.log(m.format("L"));
 
     // create variable to display content on page
-
-
-    let dateDisplay = $("#currentDay");
+   let dateDisplay = $("#currentDay");
 
 let today = moment().format("dddd, L");
 dateDisplay.text(today);
 
+
+// track the time and change the colors
 function hourTracker() {
     let timeBlockEl = moment().hours();
 
@@ -63,6 +65,7 @@ $(".timeblock").each(function (){
 
     if (timeHour < timeBlockEl) {
         $(this).addClass("past");
+        
     } else if (timeHour === timeBlockEl) {
         $(this).addClass("present");
         $(this).removeClass("past");
