@@ -15,6 +15,7 @@ let hourFivePm = $('#5pm');
     $(".saveBtn").on("click", function(event){
         event.preventDefault();
         localStorage.setItem('input', hourNineAm);
+        JSON.parse(localStorage.getItem(nineInput));
           
     });
     let nineInput = JSON.stringify(hourNineAm);
