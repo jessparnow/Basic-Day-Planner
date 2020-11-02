@@ -1,5 +1,5 @@
 //pull from html using variables
-let userInput = $("#data-input");
+
 let todoList = $("#todoList");
 
 //use local storage to save information
@@ -7,18 +7,21 @@ if (window.localStorage){
 
     $(".saveBtn").on("click", function(event){
         event.preventDefault();
+        setStorageItems();
 
-   userInput.value = localStorage.getItem('input');
-   localStorage.setItem('input', userInput.value);
-        
-        
     });
 }
     console.log(localStorage);
 
+    if (window.localStorage) {
+        let dataInput = $("#data-input");
 
+        dataInput.value = localStorage.getItem('input');
 
-
+        function setStorageItems(){
+            localStorage.setItem('input', dataInput.value);
+        } false;
+    }
 
     //set date and time using moment
 
