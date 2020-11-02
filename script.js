@@ -14,13 +14,13 @@ let hourFivePm = $('#5pm');
 
     $(".saveBtn").on("click", function(event){
         event.preventDefault();
-     
-           $('#9am').val();
-           $('#9am option:selected').text();
-                localStorage.setItem('input', hourNineAm.value);
-        
+        localStorage.setItem('input', hourNineAm);
+          
     });
-    localStorage.getItem("input");
+    let nineInput = JSON.stringify(hourNineAm);
+
+   
+
 
     console.log(localStorage);
 
