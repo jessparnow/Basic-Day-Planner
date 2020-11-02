@@ -1,47 +1,24 @@
 //pull from html using variables
 let userInput = $("#data-input");
-let displayEl = $("<div>");
-
-let itemsArray = [];
-let items
-
-if (localStorage.getItem('items')) {
-  items = JSON.parse(localStorage.getItem('items'))
-} else {
-  items = []
-}
-
-localStorage.setItem("data-input", JSON.stringify(itemsArray));
-const data = JSON.parse(localStorage.getItem('data-input'))
+let todoList = $("#todoList");
 
 //use local storage to save information
-
-    const liMaker = (text) => {
-        let todoList = document.createElement("li");
-        todoList.text = text;
-        displayEl.append(todoList);
-    }
-
-
-
+if (window.localStorage){
 
     $(".saveBtn").on("click", function(event){
         event.preventDefault();
-     
-        liMaker(userInput.value);
-        userInput.value = "";
 
-        itemsArray.push(userInput.value);
-        localStorage.setItem('items', JSON.stringify(itemsArray));
-        liMaker(userInput.value);
-        userInput.value = '';
-
-  console.log(itemsArray, items)
+   userInput.value = localStorage.getItem('input');
+   localStorage.setItem('input', userInput.value);
+        
         
     });
-    data.forEach((item) => {
-        liMaker(item);
-      });
+}
+    console.log(localStorage);
+
+
+
+
 
     //set date and time using moment
 
@@ -65,7 +42,7 @@ $(".timeblock").each(function (){
 
     if (timeHour < timeBlockEl) {
         $(this).addClass("past");
-        
+
     } else if (timeHour === timeBlockEl) {
         $(this).addClass("present");
         $(this).removeClass("past");
