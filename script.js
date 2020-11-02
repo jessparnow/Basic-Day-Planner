@@ -1,28 +1,30 @@
 //pull from html using variables
-
-let todoList = $("#todoList");
+let hourNineAm = $("#9am");
+let hourTenAm = $('#10am');
+let hourElevenAm = $('#11am');
+let hourTwelvePm = $('#12pm');
+let hourOnePm= $('#1pm');
+let hourTwoPm = $('#2pm');
+let hourThreePM = $('#3pm');
+let hourFourPm =$('#4pm');
+let hourFivePm = $('#5pm');
 
 //use local storage to save information
-if (window.localStorage){
+
 
     $(".saveBtn").on("click", function(event){
         event.preventDefault();
-        setStorageItems();
-
+     
+           $('#9am').val();
+           $('#9am option:selected').text();
+                localStorage.setItem('input', hourNineAm.value);
+        
     });
-}
+    localStorage.getItem("input");
+
     console.log(localStorage);
 
-    if (window.localStorage) {
-        let dataInput = $("#data-input");
-
-        dataInput.value = localStorage.getItem('input');
-
-        function setStorageItems(){
-            localStorage.setItem('input', dataInput.value);
-        } false;
-    }
-
+   
     //set date and time using moment
 
     let m = moment();
