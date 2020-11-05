@@ -11,20 +11,27 @@ let hourFivePm = $('#5pm');
 
 //use local storage to save information
 
+//do seperate save buttons for each hour to prevent overwriting
 
     $(".saveBtn").on("click", function(event){
         event.preventDefault();
-        localStorage.setItem('input', hourNineAm);
-        JSON.parse(localStorage.getItem(nineInput));
-          
+        // selects the parent div (figure out which hour to save)
+        let hourToSave = $(this).parent().text().trim();
+        // select the id of the text area .val() selects the user input
+        let textToSave = $("#" + hourToSave).val();
+        // first part is the key and the second part is the value of the variable
+        localStorage.setItem(hourToSave, textToSave);
+        
+          console.log(textToSave);
     });
-    let nineInput = JSON.stringify(hourNineAm);
+//looping through local storage
+    for (let i = 0; i < localStorage.length; i++){
+        //selecting the id and placing into the display key() represents the key in the object 
+         $("#" + localStorage.key(i)).val(localStorage.getItem(localStorage.key(i)));
+        console.log(localStorage.key(i))
+    }
 
-   
-
-
-    console.log(localStorage);
-
+    // $("#9am").val(localStorage.getItem("9am"));
    
     //set date and time using moment
 
